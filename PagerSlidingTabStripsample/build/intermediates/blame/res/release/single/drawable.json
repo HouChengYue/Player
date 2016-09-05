@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\AndroidStudio_Product\\Player\\PagerSlidingTabStripsample\\build\\intermediates\\res\\merged\\release\\drawable\\background_tabs_diagonal.xml",
+        "source": "D:\\AndroidStudio_Product\\Player\\PagerSlidingTabStripsample\\res\\drawable\\background_tabs_diagonal.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio_Product\\Player\\PagerSlidingTabStripsample\\build\\intermediates\\res\\merged\\release\\drawable\\background_tabs.xml",
+        "source": "D:\\AndroidStudio_Product\\Player\\PagerSlidingTabStripsample\\res\\drawable\\background_tabs.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio_Product\\Player\\PagerSlidingTabStripsample\\build\\intermediates\\res\\merged\\release\\drawable\\background_tab.xml",
+        "source": "D:\\AndroidStudio_Product\\Player\\PagerSlidingTabStripsample\\build\\intermediates\\exploded-aar\\Player\\library\\unspecified\\res\\drawable\\background_tab.xml"
+    }
+]
