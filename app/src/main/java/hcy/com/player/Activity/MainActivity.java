@@ -1,4 +1,4 @@
-package hcy.com.player;
+package hcy.com.player.Activity;
 
 
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import com.astuetz.PagerSlidingTabStrip;
 import hcy.com.player.Base.BaseActivity;
 import hcy.com.player.Frament.MyMusiclist;
 import hcy.com.player.Frament.NetMusic;
+import hcy.com.player.Frament.QuickContactFragment;
+import hcy.com.player.R;
 
 public class MainActivity extends BaseActivity {
 

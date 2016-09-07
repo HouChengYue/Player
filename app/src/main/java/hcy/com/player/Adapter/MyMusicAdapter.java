@@ -1,6 +1,7 @@
 package hcy.com.player.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class MyMusicAdapter extends BaseAdapter {
             vh.title= (TextView) view.findViewById(R.id.item_mname);
             vh.singer= (TextView) view.findViewById(R.id.item_sname);
             vh.time= (TextView) view.findViewById(R.id.item_time);
+            vh.imageView= (ImageView) view.findViewById(R.id.iv_music_item);
             view.setTag(vh);
         }
         vh= (ViewHodler) view.getTag();
@@ -64,6 +66,8 @@ public class MyMusicAdapter extends BaseAdapter {
         vh.title.setText(mp3info.getTitle());
         vh.singer.setText(mp3info.getArtist());
         vh.time.setText(MediaUtils.formatTime(mp3info.getDuration()));
+        Bitmap albumBitmap= MediaUtils.getiArtwork(context,mp3info.getId(),mp3info.getAlbumid(),true,true);//获取专辑图片
+        vh.imageView.setImageBitmap(albumBitmap);
         return view;
     }
     static class ViewHodler{

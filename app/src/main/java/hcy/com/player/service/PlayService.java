@@ -37,6 +37,9 @@ public int getCurrentProgress(){//得到播放位置的方法
     }
     return 0;
 }
+    public int getCurrentPostion(){
+        return currentPostion;
+    }
     public PlayService() {
     }
 
@@ -63,13 +66,27 @@ public int getCurrentProgress(){//得到播放位置的方法
         ex.execute(updateStatusRunnable);//调用更新进度
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (ex!=null&&!ex.isShutdown()){
+            ex.shutdown();
+            ex=null;
+        }
+    }
+
     public ExecutorService ex= Executors.newSingleThreadExecutor();//单线程池
     Runnable updateStatusRunnable=new Runnable() {
         @Override
         public void run() {
             while (true) {
-                if (musicUpdataListener!=null){
+                if (musicUpdataListener!=null&&mediaPlayer!=null&&mediaPlayer.isPlaying()){
                     musicUpdataListener.onPublish(getCurrentProgress());
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
             }
@@ -139,7 +156,13 @@ public int getCurrentProgress(){//得到播放位置的方法
             mediaPlayer.getDuration();
         }
     }
+public boolean isPlaying(){
+    if (mediaPlayer!=null){
+        return mediaPlayer.isPlaying();
+    }
 
+    return  false;
+}
     public int getDuration() {
         return mediaPlayer.getDuration();
     }

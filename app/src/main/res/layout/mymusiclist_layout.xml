@@ -19,7 +19,7 @@
             android:layout_height="60dp"
             android:src="@mipmap/app_logo2"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
@@ -44,25 +44,25 @@
             android:layout_height="match_parent"
             >
             <ImageView
-                android:id="@+id/iv_pause"
+                android:id="@+id/iv_play_pause"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/pause"
-                android:layout_marginRight="17dp"
+                android:src="@mipmap/play"
+                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/iv_next"
-                android:layout_toStartOf="@+id/iv_next"
-                android:layout_marginEnd="17dp" />
+                android:layout_toStartOf="@+id/iv_next" />
             <ImageView
                 android:id="@+id/iv_next"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@mipmap/next"
-                android:layout_alignTop="@+id/iv_pause"
+                android:layout_marginRight="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="13dp"
-                android:layout_marginEnd="13dp" />
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package hcy.com.player;
+package hcy.com.player.Frament;
 
 import android.graphics.Point;
 import android.os.Build;
@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
+
+import hcy.com.player.R;
 
 public class QuickContactFragment extends DialogFragment {
 

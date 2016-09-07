@@ -1,4 +1,4 @@
-package hcy.com.player;
+package hcy.com.player.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import hcy.com.player.R;
 import hcy.com.player.service.PlayService;
 
 /**
