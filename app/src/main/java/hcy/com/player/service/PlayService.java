@@ -31,14 +31,19 @@ public class PlayService extends Service {
     private int currentPostion;//当前播放的位置
     ArrayList<Mp3info> mp3infos;
     public MusicUpdataListener musicUpdataListener;
-public int getCurrentProgress(){//得到播放位置的方法
+    public boolean isPause=true;
+    public Mp3info mp3info;
+    public boolean isFirst=true;
+
+    public int getCurrentProgress(){//得到播放位置的方法
     if (mediaPlayer!=null||mediaPlayer.isPlaying()){
         return mediaPlayer.getCurrentPosition();
     }
     return 0;
 }
+
     public int getCurrentPostion(){
-        return currentPostion;
+        return this.currentPostion;
     }
     public PlayService() {
     }
@@ -99,7 +104,7 @@ public int getCurrentProgress(){//得到播放位置的方法
      */
     public void play(int positon) {
         if (positon >= 0 || positon < mp3infos.size()) {
-            Mp3info mp3info = mp3infos.get(positon);
+            mp3info = mp3infos.get(positon);
             Log.e("音乐服务启动", "音乐服务启动");
             try {
                 mediaPlayer.reset();
@@ -113,6 +118,7 @@ public int getCurrentProgress(){//得到播放位置的方法
             if (musicUpdataListener!=null){
                 musicUpdataListener.onChange(currentPostion);
             }
+
         }
     }
 
@@ -123,6 +129,7 @@ public int getCurrentProgress(){//得到播放位置的方法
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
         }
+        isPause=true;
     }
 
     /**
@@ -135,6 +142,7 @@ public int getCurrentProgress(){//得到播放位置的方法
             currentPostion++;
         }
         play(currentPostion);
+
     }
 
     /**
@@ -147,6 +155,7 @@ public int getCurrentProgress(){//得到播放位置的方法
             currentPostion--;
         }
         play(currentPostion);
+
     }
 
     //play的实现
@@ -155,6 +164,7 @@ public int getCurrentProgress(){//得到播放位置的方法
             mediaPlayer.start();
             mediaPlayer.getDuration();
         }
+        isPause=false;
     }
 public boolean isPlaying(){
     if (mediaPlayer!=null){

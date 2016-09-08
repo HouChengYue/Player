@@ -27,9 +27,9 @@ public abstract class BaseActivity extends FragmentActivity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             PlayService.PlayBinder playBinder = (PlayService.PlayBinder) iBinder;
-            playService = playBinder.getPlayService();
+            playService = playBinder.getPlayService();//绑定音乐服务
             playService.setMusicUpdataListener(musicUpdataListener);//设置监听
-            musicUpdataListener.onChange(playService.getCurrentPostion());
+            musicUpdataListener.onChange(playService.getCurrentPostion());//找到当前播放位置
         }
 
         @Override

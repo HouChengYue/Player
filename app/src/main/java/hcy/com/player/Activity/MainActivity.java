@@ -33,9 +33,9 @@ public class MainActivity extends BaseActivity {
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
-
+    private int position=0;
     private Drawable oldBackground = null;
-    private int currentColor = 0xFFC74B46;
+    private int currentColor = 0xFF353535;
     private MyMusiclist myMusiclist;
     private NetMusic netMusic;
 
@@ -57,7 +57,9 @@ public class MainActivity extends BaseActivity {
         tabs.setViewPager(pager);
 
         changeColor(currentColor);
+
     }
+
 
     /**
      * 更新进度条
@@ -76,6 +78,7 @@ public class MainActivity extends BaseActivity {
      */
     @Override
     public void change(int position) {
+        this.position=position;
         if (pager.getCurrentItem() == 0) {
             myMusiclist.ChangeUIpotionOnplay(position);
         } else if (pager.getCurrentItem() == 1) {
