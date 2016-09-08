@@ -191,10 +191,10 @@ public class MediaUtils {
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         if (small) {//返回小图片
             return BitmapFactory.decodeStream(context.getResources().
-                    openRawResource(R.mipmap.app_logo2), null, options);
+                    openRawResource(R.mipmap.music_album), null, options);
         }
         return BitmapFactory.decodeStream(context.getResources().
-                openRawResource(R.mipmap.app_logo2), null, options);
+                openRawResource(R.mipmap.music_album), null, options);
     }
 
     public static Bitmap getiArtworkFromFile(Context context, long songid, long albumid) {

@@ -16,18 +16,19 @@ import hcy.com.player.service.PlayService;
  * 延时3s跳转到Maincctivity
  */
 public class SplashActivity extends Activity {
-    private final int STARTACTIVITY=0x1;
+    private final int STARTACTIVITY = 0x1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        WindowManager.LayoutParams.FLAG_FULLSCREEN);//去除标题
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//去除标题
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
-       startService(new Intent(this, PlayService.class));//启动服务
-        Log.e("音乐服务启动","音乐服务启动！");
-        handler.sendEmptyMessageDelayed(STARTACTIVITY,3000);
+        Intent intent = new Intent(this, PlayService.class);
+        startService(intent);//启动服务
+        Log.e("音乐服务启动", "音乐服务启动！");
+        handler.sendEmptyMessageDelayed(STARTACTIVITY, 3000);
     }
 
     private Handler handler = new Handler() {
@@ -36,9 +37,9 @@ public class SplashActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case STARTACTIVITY:
-                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
-                break;
+                    break;
             }
         }
     };

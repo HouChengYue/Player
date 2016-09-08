@@ -10,9 +10,11 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import hcy.com.player.Activity.IMusiAPP;
 import hcy.com.player.Utils.MediaUtils;
 import hcy.com.player.vo.Mp3info;
 
@@ -26,26 +28,71 @@ import hcy.com.player.vo.Mp3info;
  * 上一首
  * 获取当前的播放进度
  */
-public class PlayService extends Service {
+public class PlayService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
     private MediaPlayer mediaPlayer;
     private int currentPostion;//当前播放的位置
     ArrayList<Mp3info> mp3infos;
     public MusicUpdataListener musicUpdataListener;
-    public boolean isPause=true;
+    public boolean isPause = true;
     public Mp3info mp3info;
-    public boolean isFirst=true;
+    public boolean isFirst = true;
+    public static final int ORDER_PLAY = 1;//顺序播放
+    public static final int RANDOM_PLAY = 2;//随机播放
+    public static final int SIGLE_PLAY = 3;//单曲循环
 
-    public int getCurrentProgress(){//得到播放位置的方法
-    if (mediaPlayer!=null||mediaPlayer.isPlaying()){
-        return mediaPlayer.getCurrentPosition();
+    private int play_modile = ORDER_PLAY;//播放模式
+
+    public int getPlay_modile() {
+        return play_modile;
     }
-    return 0;
-}
 
-    public int getCurrentPostion(){
+    /**
+     * 播放模式
+     *
+     * @param play_modile
+     */
+    public void setPlay_modile(int play_modile) {
+        this.play_modile = play_modile;
+    }
+
+    public int getCurrentProgress() {//得到播放位置的方法
+        if (mediaPlayer != null || mediaPlayer.isPlaying()) {
+            return mediaPlayer.getCurrentPosition();
+        }
+        return 0;
+    }
+
+    public int getCurrentPostion() {
         return this.currentPostion;
     }
+
     public PlayService() {
+    }
+
+    private Random random = new Random();
+
+    @Override
+    public void onCompletion(MediaPlayer mediaPlayer) {
+        switch (play_modile) {
+            case ORDER_PLAY:
+                next();
+                break;
+            case RANDOM_PLAY:
+                int i = random.nextInt(mp3infos.size());
+                play(i);
+                break;
+            case SIGLE_PLAY:
+                play(currentPostion);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+        mediaPlayer.reset();
+        return false;
     }
 
     /**
@@ -66,26 +113,32 @@ public class PlayService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        IMusiAPP app = (IMusiAPP) getApplication();
+        currentPostion = app.sp.getInt("currentPostion", 0);
+        play_modile = app.sp.getInt("play_modile", PlayService.ORDER_PLAY);
         mediaPlayer = new MediaPlayer();
+        mediaPlayer.setOnCompletionListener(this);
+        mediaPlayer.setOnErrorListener(this);
         mp3infos = MediaUtils.getMp3Infos(this);
         ex.execute(updateStatusRunnable);//调用更新进度
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (ex!=null&&!ex.isShutdown()){
+        if (ex != null && !ex.isShutdown()) {
             ex.shutdown();
-            ex=null;
+            ex = null;
         }
     }
 
-    public ExecutorService ex= Executors.newSingleThreadExecutor();//单线程池
-    Runnable updateStatusRunnable=new Runnable() {
+    public ExecutorService ex = Executors.newSingleThreadExecutor();//单线程池
+    Runnable updateStatusRunnable = new Runnable() {
         @Override
         public void run() {
             while (true) {
-                if (musicUpdataListener!=null&&mediaPlayer!=null&&mediaPlayer.isPlaying()){
+                if (musicUpdataListener != null && mediaPlayer != null && mediaPlayer.isPlaying()) {
                     musicUpdataListener.onPublish(getCurrentProgress());
                 }
                 try {
@@ -94,9 +147,10 @@ public class PlayService extends Service {
                     e.printStackTrace();
                 }
             }
-            }
+        }
 
     };
+
     /**
      * 播放
      *
@@ -115,7 +169,7 @@ public class PlayService extends Service {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (musicUpdataListener!=null){
+            if (musicUpdataListener != null) {
                 musicUpdataListener.onChange(currentPostion);
             }
 
@@ -129,7 +183,7 @@ public class PlayService extends Service {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
         }
-        isPause=true;
+        isPause = true;
     }
 
     /**
@@ -164,15 +218,17 @@ public class PlayService extends Service {
             mediaPlayer.start();
             mediaPlayer.getDuration();
         }
-        isPause=false;
-    }
-public boolean isPlaying(){
-    if (mediaPlayer!=null){
-        return mediaPlayer.isPlaying();
+        isPause = false;
     }
 
-    return  false;
-}
+    public boolean isPlaying() {
+        if (mediaPlayer != null) {
+            return mediaPlayer.isPlaying();
+        }
+
+        return false;
+    }
+
     public int getDuration() {
         return mediaPlayer.getDuration();
     }

@@ -1,6 +1,7 @@
 package hcy.com.player.Activity;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -226,5 +227,16 @@ public class MainActivity extends BaseActivity {
             return null;
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        保存播放状态值
+        IMusiAPP app= (IMusiAPP) getApplication();
+        SharedPreferences.Editor editor=app.sp.edit();
+        editor.putInt("currentPostion",playService.getCurrentPostion());
+        editor.putInt("play_modile",playService.getPlay_modile());
+        editor.commit();
     }
 }

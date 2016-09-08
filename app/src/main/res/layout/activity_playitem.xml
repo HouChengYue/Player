@@ -6,131 +6,114 @@
     android:background="@mipmap/jb_bg"
     tools:context="hcy.com.player.Activity.PlayitemActivity">
 
-    <TextView
-        android:id="@+id/tv_bmname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:text="歌曲名称"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#017580" />
-
-    <TextView
-        android:id="@+id/tv_bsname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="歌手"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#0091b9"
-        android:layout_below="@+id/tv_bmname"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:id="@+id/iv_balbum"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:src="@mipmap/music_album"
-       android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true" />
-<RelativeLayout
-    android:background="#a0353535"
-    android:layout_width="500dp"
-    android:layout_height="140dp"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true">
-    <SeekBar
-    android:padding="8sp"
-        android:layout_marginLeft="8sp"
-        android:layout_marginRight="8sp"
-    android:id="@+id/seekBar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentStart="true"
-    android:layout_marginBottom="68dp" />
-
-    <TextView
-        android:id="@+id/tv_bdurtion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_local"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relativeLayout">
+    </android.support.v4.view.ViewPager>
+    <RelativeLayout
+        android:layout_width="500dp"
+        android:layout_height="140dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="3:00"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#0091b9" />
+        android:background="#a0353535"
+        android:id="@+id/relativeLayout">
 
-    <TextView
-        android:id="@+id/tv_btime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_bdurtion"
-        android:layout_alignEnd="@+id/seekBar"
-        android:layout_alignRight="@+id/seekBar"
-        android:text="2:51"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#0091b9" />
-
-    <ImageView
-        android:id="@+id/iv_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/order"
-        android:layout_alignTop="@+id/iv_like"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:id="@+id/iv_like"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/xin_bai"
-        android:layout_alignTop="@+id/linearLayout"
-        android:layout_toRightOf="@+id/iv_order"
-        android:layout_toEndOf="@+id/iv_order" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/tv_btime"
-        android:layout_toStartOf="@+id/tv_btime"
-        android:id="@+id/linearLayout">
-
-
-        <ImageView
-            android:layout_margin="5dp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/iv_bprev"
+        <SeekBar
+            android:id="@+id/seekBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/prev2" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="68dp"
+            android:layout_marginLeft="35sp"
+            android:layout_marginRight="35sp"
+            android:padding="8sp" />
 
-
-        <ImageView
-            android:layout_margin="5dp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/iv_bPlay_pause"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/play" />
-
-        <ImageView
-            android:layout_margin="5dp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/iv_bnext"
+        <TextView
+            android:id="@+id/tv_bdurtion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/next2" />
-    </LinearLayout></RelativeLayout>
+            android:text="3:00"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#0091b9"
+            android:layout_alignTop="@+id/seekBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp" />
 
+        <TextView
+            android:id="@+id/tv_btime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2:51"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#0091b9"
+            android:layout_alignTop="@+id/tv_bdurtion"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/iv_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/order"
+            android:layout_alignTop="@+id/iv_like"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/xin_bai"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:layout_alignTop="@+id/linearLayout"
+            android:layout_alignLeft="@+id/seekBar"
+            android:layout_alignStart="@+id/seekBar" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/tv_btime"
+            android:layout_toStartOf="@+id/tv_btime"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/iv_bprev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:src="@mipmap/prev2" />
+
+
+            <ImageView
+                android:id="@+id/iv_bPlay_pause"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:src="@mipmap/play" />
+
+            <ImageView
+                android:id="@+id/iv_bnext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:src="@mipmap/next2" />
+        </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
