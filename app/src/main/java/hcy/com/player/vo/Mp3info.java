@@ -5,6 +5,7 @@ package hcy.com.player.vo;
  */
 public class Mp3info {
     private long id;
+    private long mp3id;//收藏音乐时的id
     private String title;//歌名
     private String artist;//艺术家
     private String album;//专辑
@@ -21,6 +22,15 @@ public class Mp3info {
     public void setId(long id) {
         this.id = id;
     }
+
+    public long getMp3id() {
+        return mp3id;
+    }
+
+    public void setMp3id(long mp3id) {
+        this.mp3id = mp3id;
+    }
+
 
     public String getTitle() {
         return title;

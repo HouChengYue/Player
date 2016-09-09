@@ -11,6 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 
 import java.util.ArrayList;
@@ -37,9 +38,11 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
     public LrcFra lrcFra;
     private int p;
     private IMusiAPP app;
+    private Mp3info mp3info;
 
     /**
      * 创建视图
+     *
      * @param savedInstanceState
      */
     @Override
@@ -93,6 +96,7 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * seekBar 功能实现 监听 拖动
+     *
      * @param seekBar
      * @param i
      * @param b
@@ -140,13 +144,14 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 改变操作
+     *
      * @param position
      */
     @Override
     public void change(int position) {
         p = position;
         if (position >= 0 || position <= mp3infos.size()) {
-            Mp3info mp3info = mp3infos.get(position);
+            mp3info = mp3infos.get(position);
             Log.e("mp3info", "歌曲名：" + mp3info.getTitle()
                     + "歌手" + mp3info.getArtist() + "时长：" + MediaUtils.formatTime(mp3info.getDuration()));
             tv_durtion.setText(MediaUtils.formatTime(mp3info.getDuration()));//获取时长
@@ -167,30 +172,16 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
                 case PlayService.SIGLE_PLAY:
                     iv_order.setImageResource(R.mipmap.single);
                     break;
-                case R.id.iv_like:
-                    try {
-                        Mp3info like=  app.dbUtils.findById(Mp3info.class,mp3info.getId());
-                        System.out.print(like);
-                        if (like==null){
-                            app.dbUtils.save(mp3info);
-                            iv_like.setImageResource(R.mipmap.xin_hong);
-                        }else {
-                            app.dbUtils.deleteById(Mp3info.class,mp3info.getId());
-                            iv_like.setImageResource(R.mipmap.xin_bai);
-                        }
-                    } catch (DbException e) {
-                        e.printStackTrace();
-                    }
-                    break;
+
                 default:
                     break;
             }
             if (viewPager.getCurrentItem() == 0) {
                 if (playItem == null) {
                     playItem = new PlayItem();
-                    playItem.ChangeUI(position,this);
-                }else{
-                    playItem.ChangeUI(position,this);
+                    playItem.ChangeUI(position, this);
+                } else {
+                    playItem.ChangeUI(position, this);
                 }
 
             } else if (viewPager.getCurrentItem() == 1) {
@@ -203,6 +194,7 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 获取Mp3infos
+     *
      * @return
      */
     public ArrayList<Mp3info> getMp3infos() {
@@ -211,6 +203,7 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
 
     /**
      * 点击时间监听
+     *
      * @param view
      */
     @Override
@@ -256,9 +249,27 @@ public class PlayitemActivity extends BaseActivity implements View.OnClickListen
                         break;
                 }
                 break;
+            case R.id.iv_like:
+                try {
+                    Mp3info like=app.dbUtils.findFirst(Selector.from(Mp3info.class).where("mp3id","=",mp3info.getId()));
+                    Log.e("like", mp3info.getId() + "");
+                    if (like == null) {
+                        mp3info.setMp3id(mp3info.getId());
+                        app.dbUtils.save(mp3info);
+                        iv_like.setImageResource(R.mipmap.xin_hong);
+                        Log.e("save", "save");
+                    } else {
+                        app.dbUtils.deleteById(Mp3info.class, like.getId());
+                        iv_like.setImageResource(R.mipmap.xin_bai);
+                        Log.e("dele", "dele");
+                    }
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+                break;
             default:
                 break;
         }
-        playItem.ChangeUI(p,this);
+        playItem.ChangeUI(p, this);
     }
 }
