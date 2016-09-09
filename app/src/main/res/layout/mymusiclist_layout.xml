@@ -13,7 +13,7 @@
         android:layout_height="68dp"
         android:layout_alignParentBottom="true"
         android:padding="8sp"
-        android:background="#a0353535"
+        android:background="#c8000000"
         >
         <ImageView
             android:id="@+id/iv_mymuic"

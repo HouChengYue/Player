@@ -18,7 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#a0353535"
+        android:background="#c8000000"
         android:id="@+id/relativeLayout">
 
         <SeekBar

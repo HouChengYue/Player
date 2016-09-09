@@ -33,7 +33,16 @@ public class MyMusiclist extends Fragment implements AdapterView.OnItemClickList
     private MyMusicAdapter mymusicadapter;
     private ImageView iv_mymuic, iv_play_pause, iv_next, iv_album;
     private TextView tv_mname, tv_sname;
+    private int p;//播放位置
 
+
+    /**
+     * 创建View
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -116,7 +125,7 @@ public class MyMusiclist extends Fragment implements AdapterView.OnItemClickList
             }
             Bitmap albumBitmap = MediaUtils.getiArtwork(main, mp3info.getId(), mp3info.getAlbumid(), true, true);//获取专辑图片
             iv_mymuic.setImageBitmap(albumBitmap);
-
+            p = positon;
         }
     }
 
@@ -144,7 +153,8 @@ public class MyMusiclist extends Fragment implements AdapterView.OnItemClickList
                 startActivity(i);
                 break;
             default:
-                ;
+               break;
         }
+        ChangeUIpotionOnplay(p);
     }
 }
